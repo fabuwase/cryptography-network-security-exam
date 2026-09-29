@@ -1,0 +1,8 @@
+
+Sample Student Record
+Student ID: TEST001
+Name: Fabiola
+Programme: ETT
+Year: 4
+Email: fabiola@example.com
+Status: Active
