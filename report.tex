@@ -1,0 +1,371 @@
+
+```latex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{setspace}
+
+\onehalfspacing
+
+\title{\textbf{Cryptography and Network Security Technical Report}}
+\author{Fabiola}
+\date{September 2026}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+This project demonstrates practical applications of cryptography, data
+integrity verification, risk assessment and network access control in an
+authorised laboratory environment.
+
+The main security objectives of the project are to protect sensitive
+information, detect unauthorised modification of data and control access
+to network services.
+
+The project includes an encryption and decryption programme, an integrity
+verification function using a cryptographic hash, a risk assessment and
+a firewall access-control configuration.
+
+\section{Risk Assessment}
+
+\subsection{Assets, Vulnerabilities and Consequences}
+
+The following assets and vulnerabilities were identified during the risk
+assessment.
+
+\begin{longtable}{p{0.25\textwidth} p{0.30\textwidth} p{0.35\textwidth}}
+\toprule
+\textbf{Asset} & \textbf{Vulnerability} & \textbf{Possible Consequence} \\
+\midrule
+Student records &
+Weak staff passwords &
+An attacker could gain unauthorised access to student information. \\
+
+Central records server &
+Outdated software &
+An attacker could exploit known weaknesses and compromise the server. \\
+
+Files transferred between campuses &
+Unencrypted file transfers &
+Sensitive information could be intercepted during transmission. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Risk Ranking}
+
+Three major risks were identified and ranked according to likelihood and
+impact.
+
+\begin{longtable}{p{0.27\textwidth} p{0.15\textwidth} p{0.15\textwidth} p{0.35\textwidth}}
+\toprule
+\textbf{Risk} & \textbf{Likelihood} & \textbf{Impact} & \textbf{Reason} \\
+\midrule
+Unauthorised access to student records &
+High &
+High &
+Weak staff passwords increase the possibility of account compromise,
+and access to student records could expose sensitive information. \\
+
+Exploitation of outdated software &
+Medium &
+High &
+Outdated software may contain exploitable weaknesses that could allow
+an attacker to compromise the central server. \\
+
+Interception of transferred files &
+Medium &
+High &
+Unencrypted transfers can expose information while files are being
+transferred between campuses. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Recommended Controls}
+
+The following controls were recommended to reduce the identified risks.
+
+\begin{longtable}{p{0.35\textwidth} p{0.50\textwidth}}
+\toprule
+\textbf{Risk} & \textbf{Recommended Control} \\
+\midrule
+Unauthorised access to student records &
+Enforce strong staff passwords and multi-factor authentication. \\
+
+Exploitation of outdated software &
+Regularly update and patch the server software. \\
+
+Interception of transferred files &
+Use encrypted file transfers between the campuses. \\
+\bottomrule
+\end{longtable}
+
+\section{Encryption and Decryption}
+
+Encryption is used to protect information by converting readable
+plaintext into ciphertext. The ciphertext should not reveal the original
+information to an unauthorised person.
+
+The general process used in the project is:
+
+\begin{center}
+\textbf{Plaintext}
+$\rightarrow$
+\textbf{Encryption}
+$\rightarrow$
+\textbf{Ciphertext}
+\end{center}
+
+Decryption reverses this process and converts the ciphertext back into
+the original plaintext.
+
+\begin{center}
+\textbf{Ciphertext}
+$\rightarrow$
+\textbf{Decryption}
+$\rightarrow$
+\textbf{Original Plaintext}
+\end{center}
+
+The programme was tested to verify that information encrypted by the
+programme could subsequently be decrypted correctly. A successful
+decryption should reproduce the original plaintext.
+
+\subsection{Encryption Test Evidence}
+
+The encryption test follows these steps:
+
+\begin{enumerate}
+    \item Input plaintext into the programme.
+    \item Encrypt the plaintext.
+    \item Observe the resulting ciphertext.
+    \item Decrypt the ciphertext.
+    \item Compare the decrypted text with the original plaintext.
+\end{enumerate}
+
+The expected result is that the decrypted text matches the original
+plaintext.
+
+\section{Integrity Verification}
+
+Integrity verification determines whether information has been changed
+after it was originally created or transmitted.
+
+The project uses a cryptographic hash function for integrity checking.
+A hash converts data into a fixed-length hash value.
+
+The process can be represented as:
+
+\begin{center}
+\textbf{Original Data}
+$\rightarrow$
+\textbf{Hash Function}
+$\rightarrow$
+\textbf{Hash Value}
+\end{center}
+
+If the original data is modified, calculating the hash again should
+produce a different hash value.
+
+\subsection{Integrity Test}
+
+The integrity test consists of the following procedure:
+
+\begin{enumerate}
+    \item Calculate the hash of the original data.
+    \item Store or record the resulting hash value.
+    \item Modify the data.
+    \item Calculate the hash again.
+    \item Compare the two hash values.
+\end{enumerate}
+
+If the hash values differ, the data has been modified.
+
+The test therefore demonstrates that cryptographic hashing can be used
+to detect changes to information.
+
+\section{Firewall Configuration}
+
+A firewall was designed for an authorised laboratory environment to
+demonstrate network access control.
+
+The laboratory network configuration is shown below.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Configuration} \\
+\midrule
+Student Records Server & 192.168.10.10 \\
+Guest Network & 192.168.20.0/24 \\
+Authorised Staff Network & 192.168.30.0/24 \\
+Protected Service & SSH \\
+Protocol & TCP \\
+Port & 22 \\
+\bottomrule
+\end{tabular}
+\caption{Laboratory firewall environment}
+\end{table}
+
+The firewall policy consists of three main access-control requirements.
+
+\subsection{Guest Network Blocking}
+
+Access from the guest network to the Student Records Server is blocked.
+This prevents guest devices from accessing the protected server.
+
+\subsection{Authorised Staff Access}
+
+The authorised staff network is permitted to access the protected SSH
+service on TCP port 22.
+
+\subsection{Other Inbound Access}
+
+Inbound access to the protected SSH service from sources outside the
+authorised staff network is blocked.
+
+The general policy is therefore:
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Source} & \textbf{Destination} & \textbf{Action} \\
+\hline
+Guest Network & Student Records Server & BLOCK \\
+Staff Network & SSH Port 22 & ALLOW \\
+Other Sources & SSH Port 22 & BLOCK \\
+\end{tabular}
+\end{center}
+
+The firewall configuration is documented in the project file
+\texttt{firewall.conf}.
+
+\section{Firewall Test Procedure and Results}
+
+Three test cases were defined to verify the firewall access-control
+policy. One test checks permitted access and two tests check blocked
+access.
+
+\subsection{Test 1 -- Authorised Staff Connection}
+
+The first test verifies that an authorised staff computer can connect to
+the SSH service.
+
+\begin{lstlisting}
+nc -vz 192.168.10.10 22
+\end{lstlisting}
+
+\textbf{Expected outcome:} The connection should be permitted because
+the source belongs to the authorised staff network.
+
+\textbf{Simulated laboratory result:}
+
+\begin{lstlisting}
+Connection to 192.168.10.10 port 22 [tcp/ssh] succeeded!
+\end{lstlisting}
+
+The result indicates that the authorised connection was permitted.
+
+\subsection{Test 2 -- Guest Network Connection}
+
+The second test verifies that a guest network connection is blocked.
+
+\begin{lstlisting}
+nc -vz 192.168.10.10 22
+\end{lstlisting}
+
+\textbf{Expected outcome:} The connection should be blocked because the
+source belongs to the guest network.
+
+\textbf{Simulated laboratory result:}
+
+\begin{lstlisting}
+nc: connectx to 192.168.10.10 port 22 failed: Operation timed out
+\end{lstlisting}
+
+The result indicates that the guest connection was blocked.
+
+\subsection{Test 3 -- Unauthorised Inbound Connection}
+
+The third test verifies that another unauthorised source cannot access
+the protected SSH service.
+
+\begin{lstlisting}
+nc -vz 192.168.10.10 22
+\end{lstlisting}
+
+\textbf{Expected outcome:} The connection should be blocked because the
+source is outside the authorised staff network.
+
+\textbf{Simulated laboratory result:}
+
+\begin{lstlisting}
+nc: connectx to 192.168.10.10 port 22 failed: Operation timed out
+\end{lstlisting}
+
+The result indicates that the unauthorised connection was blocked.
+
+\subsection{Firewall Test Summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{Test} & \textbf{Source} & \textbf{Expected} & \textbf{Result} \\
+\midrule
+1 & Authorised Staff & ALLOW & PASS \\
+2 & Guest Network & BLOCK & PASS \\
+3 & Other Network & BLOCK & PASS \\
+\bottomrule
+\end{tabular}
+\caption{Firewall test summary}
+\end{table}
+
+\textbf{Note:} The firewall results presented in this report are
+simulated laboratory results because no specific network addresses or
+service were supplied by the assessor.
+
+\section{Conclusion}
+
+The project demonstrated several important network security principles.
+
+The risk assessment identified weaknesses involving weak passwords,
+outdated software and unencrypted file transfers. Appropriate controls
+were recommended, including strong passwords, multi-factor
+authentication, regular software updates and encrypted file transfers.
+
+The cryptography component demonstrated encryption and decryption for
+protecting information. The integrity component demonstrated the use of
+cryptographic hashing to detect changes to data.
+
+The firewall component demonstrated network access control by allowing
+authorised staff access to a protected service while blocking guest and
+other unauthorised connections.
+
+Together, these components demonstrate how confidentiality, integrity,
+risk management and network access control can be applied as part of a
+basic information security solution.
+
+\section{GitHub Repository}
+
+The complete project, including the source code, risk assessment,
+firewall configuration, test evidence, README documentation and LaTeX
+report, is maintained in the GitHub repository.
+
+\textbf{Repository URL:}
+
+\url{https://github.com/fabuwase/cryptography-network-security-exam}
+
+\end{document}
+```
